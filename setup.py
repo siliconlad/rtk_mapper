@@ -6,7 +6,7 @@ package_name = 'rtk_mapper'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='0.1.0',
     packages=find_packages(),
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -26,8 +26,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'rtk_mapper = rtk_mapper.rtk_mapper:main',
-            'rtk_viz = rtk_mapper.rtk_viz:main'
+            'mapper = rtk_mapper.mapper:main',
         ],
     },
 )
