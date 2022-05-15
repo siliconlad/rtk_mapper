@@ -4,7 +4,7 @@ import warnings
 
 import matplotlib.axes
 import numpy as np
-from enum import StrEnum
+from enum import Enum
 
 from typing import List
 
@@ -34,7 +34,7 @@ class NoMarkers(IndexError):
     pass
 
 
-class MarkerType(StrEnum):
+class MarkerType(Enum):
     """Marker types with associated hex color"""
     BLUE = "#0000ff"
     YELLOW = "#ecef1f"
