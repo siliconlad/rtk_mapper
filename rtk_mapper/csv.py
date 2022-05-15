@@ -102,8 +102,8 @@ class EUFSFormat(CSVFormat):
         m: RTKMap = RTKMap()
         for i, r in df.iterrows():
             # Ignore direction because it makes no difference for the map
-            pos: np.ndarray = np.array(r['x'], r['y'])
-            cov: np.ndarray = np.array(r['x_variance'],r['xy_covariance'],r['xy_covariance'],r['y_variance'])
+            pos: np.ndarray = np.array([r['x'], r['y']])
+            cov: np.ndarray = np.array([r['x_variance'], r['xy_covariance'], r['xy_covariance'], r['y_variance']])
             m_type: MarkerType = EUFSFormat.get_marker_type(r['tag'])
             m.add_marker(Marker(pos, cov, m_type))
         return m
@@ -162,8 +162,8 @@ class RTKFormat(CSVFormat):
 
         m: RTKMap = RTKMap()
         for i, r in df.iterrows():
-            pos: np.ndarray = np.array(r['longitude'], r['latitude'])
-            cov: np.ndarray = np.array(r['longitude_var'],r['covariance'],r['covariance'],r['latitude_var'])
+            pos: np.ndarray = np.array([r['longitude'], r['latitude']])
+            cov: np.ndarray = np.array([r['longitude_var'], r['covariance'], r['covariance'], r['latitude_var']])
             m_type: MarkerType = RTKFormat.get_marker_type(r['type'])
             m.add_marker(Marker(pos, cov, m_type))
         return m
