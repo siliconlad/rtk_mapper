@@ -147,9 +147,14 @@ class RTKMap:
         Calculates and performs a linear transformation of all markers so that car_start
         is at the origin and the finish line marked by the orange cones are in x-direction.
 
+        :raises NoMarkers: raised if map has no markers
         :raises NoCarStartMarker: Normalization cannot occur without a CAR_START marker.
         :raises NotEnoughOrangeMarkers: Normalization cannot occur without at least 1 orange cone.
         """
+
+        if len(self.markers) == 0:
+            raise NoMarkers("No markers! Cannot normalize map.")
+
         car_start: Marker | None = None
         big_orange: np.ndarray = np.array([]).reshape((0, 2))
         for marker in self.markers:

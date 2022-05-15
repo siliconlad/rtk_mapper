@@ -1,27 +1,27 @@
 from __future__ import annotations
 
-import sys
-import signal
 import os
-from os import path
+import signal
+import sys
 from datetime import datetime
+from os import path
 
 import matplotlib
-import matplotlib.figure
 import matplotlib.backends.backend_agg as agg
+import matplotlib.figure
 import matplotlib.pyplot as plt
-import pylab
 import numpy as np
 import pygame
 import pygame.event
 import pygame.locals
+import pylab
 import rclpy
 from rclpy.logging import LoggingSeverity
 from rclpy.node import Node
 from sensor_msgs.msg import NavSatFix
 
-from rtk_mapper.map import RTKMap, Marker, MarkerType, NoMarkers, NotInUpdateMode
 from rtk_mapper.csv import RTKFormat, EUFSFormat
+from rtk_mapper.map import RTKMap, Marker, MarkerType, NoMarkers, NotInUpdateMode, NoCarStartMarker
 from rtk_mapper.plot import RTKPlotter
 from rtk_mapper.utm import utm_transform
 
@@ -92,9 +92,14 @@ class RTKMapper(Node):
 
         # Save utm map
         utm_map: RTKMap = utm_transform(self.map, copy=False)
-        utm_map.normalize()
-        EUFSFormat.save_csv(utm_map, self.utm_map_path)
-        self.get_logger().info(f"Saved UTM map to {self.utm_map_path}")
+        try:
+            utm_map.normalize()
+            EUFSFormat.save_csv(utm_map, self.utm_map_path)
+            self.get_logger().info(f"Saved UTM map to {self.utm_map_path}")
+        except NoMarkers:
+            self.get_logger().error("No markers in map. Cannot normalize.")
+        except NoCarStartMarker:
+            self.get_logger().error("No CAR_START marker. Cannot normalize map.")
 
         # Quit cleanly
         pygame.quit()
