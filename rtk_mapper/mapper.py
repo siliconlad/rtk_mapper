@@ -66,6 +66,9 @@ class RTKMapper(Node):
         # ROS Timer (keyboard loop @ 100Hz)
         self.timer_ = self.create_timer(0.01, self.loop)
 
+        # Print empty figure
+        self.update()
+
         # Finish by printing instructions on how to use the program
         self.get_logger().info("rtk_mapper is ready!")
         self.print_help()
@@ -238,11 +241,12 @@ class RTKMapper(Node):
         Update pygame display with new plot.
         """
         # Create figure
-        fig: matplotlib.figure.Figure = pylab.figure(figsize=[4,4], dpi=100)
+        fig: matplotlib.figure.Figure = pylab.figure(figsize=[7, 7], dpi=100)
         ax = fig.gca()
 
         # Plot map in UTM because it looks better
         RTKPlotter.plot(utm_transform(self.map, copy=True), ax)
+        fig.tight_layout()
 
         # Matplotlib magic to get it to work with pygame
         # See https://www.pygame.org/wiki/MatplotlibPygame
