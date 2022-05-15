@@ -181,7 +181,7 @@ class RTKMapper(Node):
                     self.delete()
                 elif event.key == pygame.K_TAB and event.mod == 0:
                     self.select_next_marker()
-                elif event.key == pygame.K_TAB and event.mode == 1:
+                elif event.key == pygame.K_TAB and event.mod == 1:
                     self.select_prev_marker()
             elif event.type == pygame.KEYUP and event.key == pygame.K_SPACE:
                 self.stop_accumulation()
