@@ -1,6 +1,8 @@
+from typing import List
+
 import numpy as np
 import pandas as pd
-from typing import List
+
 from rtk_mapper.map import RTKMap, Marker, MarkerType
 
 
@@ -115,7 +117,7 @@ class EUFSFormat(CSVFormat):
         :param path: path to save csv file
         """
         with open(path, "w") as f:
-            f.write(",".join(EUFSFormat.fmt))  # Write csv header
+            f.write(",".join(EUFSFormat.fmt) + "\n")  # Write csv header
             for marker in m.markers:
                 line: List[str] = [
                     EUFSFormat.get_marker_str(marker.type),
@@ -125,7 +127,7 @@ class EUFSFormat(CSVFormat):
                     str(marker.cov[3]),
                     str(marker.cov[1])
                 ]
-                f.write(",".join(line))
+                f.write(",".join(line) + "\n")
 
 
 class RTKFormat(CSVFormat):
@@ -175,7 +177,7 @@ class RTKFormat(CSVFormat):
         :param path: path to save csv file
         """
         with open(path, "w") as f:
-            f.write(",".join(RTKFormat.fmt))  # Write csv header
+            f.write(",".join(RTKFormat.fmt) + "\n")  # Write csv header
             for marker in m.markers:
                 line: List[str] = [
                     RTKFormat.get_marker_str(marker.type),
@@ -185,4 +187,4 @@ class RTKFormat(CSVFormat):
                     str(marker.cov[3]),
                     str(marker.cov[1])
                 ]
-                f.write(",".join(line))
+                f.write(",".join(line) + "\n")
