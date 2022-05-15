@@ -135,7 +135,7 @@ class RTKMapper(Node):
         if self.m_type != m_type:
             self.m_type = m_type
             self.m_type_str = RTKFormat.get_marker_str(self.m_type)
-            self.get_logger().info(f"Ready to record {self.m_type_str} cones")
+            self.get_logger().info(f"Ready to record {self.m_type_str.upper()} cones")
 
     def delete(self) -> None:
         """Delete marker"""
