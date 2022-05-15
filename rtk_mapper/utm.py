@@ -20,5 +20,5 @@ def utm_transform_marker(marker: Marker, copy: bool = False) -> Marker:
     m: Marker = deepcopy(marker) if copy else marker
     utm_coord = utm.from_latlon(m.pos[1], m.pos[0])
     # utm_coord is (easting, northing,...)
-    m.pos = np.array(utm_coord[0], utm_coord[1])
+    m.pos = np.array([utm_coord[0], utm_coord[1]])
     return m
