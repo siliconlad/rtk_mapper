@@ -9,7 +9,7 @@ from enum import Enum
 from typing import List
 
 
-class NotEnoughOrangeCones(RuntimeError):
+class NotEnoughOrangeMarkers(RuntimeError):
     """Raised when map has not enough orange cones."""
     pass
 
@@ -148,7 +148,7 @@ class RTKMap:
         is at the origin and the finish line marked by the orange cones are in x-direction.
 
         :raises NoCarStartMarker: Normalization cannot occur without a CAR_START marker.
-        :raises NotEnoughOrangeCones: Normalization cannot occur without at least 1 orange cone.
+        :raises NotEnoughOrangeMarkers: Normalization cannot occur without at least 1 orange cone.
         """
         car_start: Marker | None = None
         big_orange: np.ndarray = np.array([]).reshape((0, 2))
@@ -164,7 +164,7 @@ class RTKMap:
 
         # Need at least one orange cone to do normalization
         if big_orange.shape[0] < 1:
-            raise NotEnoughOrangeCones("Not have enough BIG_ORANGE cones. Cannot normalize map.")
+            raise NotEnoughOrangeMarkers("Not have enough BIG_ORANGE cones. Cannot normalize map.")
 
         # Some tracks may only have two cones (e.g Skidpad).
         if big_orange.shape[0] < 2:
