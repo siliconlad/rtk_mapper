@@ -110,12 +110,12 @@ The complete list of keys and their meaning in the two different modes are as fo
 
 ### Topic
 
-The `rtk_mapper` node subscribes to the `/fix` topic. It must have
+The `mapper` node subscribes to the `/fix` topic. It must have
 type [`sensor_msgs/msg/NavSatFix`](http://docs.ros.org/en/api/sensor_msgs/html/msg/NavSatFix.html).
 
 ### Parameters
 
-The `rtk_mapper` has the following parameters:
+`mapper` has the following parameters:
 
 |   Name    |   Type   | Description                                                                                                        |
 |:---------:|:--------:|:-------------------------------------------------------------------------------------------------------------------|
@@ -130,7 +130,7 @@ on the map. This is a read only mode of the map.
 
 ### Parameters
 
-The `rtk_mapper` has the following parameters:
+`viewer` has the following parameters:
 
 |   Name    |   Type   | Description                                               |
 |:---------:|:--------:|:----------------------------------------------------------|
