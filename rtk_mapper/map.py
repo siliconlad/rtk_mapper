@@ -1,12 +1,10 @@
 from __future__ import annotations
 
 import warnings
-
-import matplotlib.axes
-import numpy as np
 from enum import Enum
-
 from typing import List
+
+import numpy as np
 
 
 class NotEnoughOrangeMarkers(RuntimeError):
@@ -93,7 +91,10 @@ class RTKMap:
 
         idx: int = self.selected if self.update_mode else -1
         self.markers.pop(idx)
-        self.select_prev_marker()  # Select previous marker to ensure index is always valid
+        try:
+            self._select_prev_marker()
+        except NoMarkers:
+            self.selected = 0
 
     def enter_update_mode(self) -> None:
         """Enters update mode. Does nothing if already in update mode."""
@@ -117,6 +118,16 @@ class RTKMap:
             raise NoMarkers("No markers to select!")
         self.selected = (self.selected + 1) % len(self.markers)
 
+    def _select_prev_marker(self) -> None:
+        """
+        Selects previous marker.
+
+        :raises NoMarkers: raised if map has no markers
+        """
+        if len(self.markers) == 0:
+            raise NoMarkers("No markers to select!")
+        self.selected = (self.selected + len(self.markers) - 1) % len(self.markers)
+
     def select_prev_marker(self) -> None:
         """
         Selects previous marker in the sequence in which the markers were added to the map.
@@ -127,9 +138,7 @@ class RTKMap:
         """
         if not self.update_mode:
             raise NotInUpdateMode("Must be in update mode to select prev marker.")
-        elif len(self.markers) == 0:
-            raise NoMarkers("No markers to select!")
-        self.selected = (self.selected + len(self.markers) - 1) % len(self.markers)
+        self._select_prev_marker()
 
     def update_marker(self, m: Marker) -> None:
         """
@@ -159,7 +168,7 @@ class RTKMap:
         big_orange: np.ndarray = np.array([]).reshape((0, 2))
         for marker in self.markers:
             if marker.type == MarkerType.CAR_START:
-                car_start = marker
+                car_start = marker.pos
             if marker.type == MarkerType.BIG_ORANGE:
                 big_orange = np.vstack((big_orange, marker.pos))
 
