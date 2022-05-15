@@ -208,9 +208,10 @@ class RTKMapper(Node):
         if self.accumulate:
             # Add message to buffer
             self.fix_buff = np.vstack((self.fix_buff, [msg.longitude, msg.latitude]))
-            cov: list = [
-                msg.position_covariance[0], msg.position_covariance[3],
-                msg.position_covariance[1], msg.position_covariance[4]]
+            cov: list = np.array([
+                [msg.position_covariance[0], msg.position_covariance[3]],
+                [msg.position_covariance[1], msg.position_covariance[4]]
+            ])
             self.cov_buff = np.vstack((self.cov_buff, [cov]))
             self.get_logger().info(f"Accumulated {self.fix_buff.shape[0]} messages")
         # If self.log is false, but we have stuff in the buffer, create new marker
