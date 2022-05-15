@@ -125,8 +125,10 @@ class RTKMapper(Node):
         """Toggle update mode."""
         if self.map.update_mode:
             self.map.exit_update_mode()
+            self.get_logger().info("Exited UPDATE mode.")
         else:
             self.map.enter_update_mode()
+            self.get_logger().info("Entered UPDATE mode.")
 
     def set_marker(self, m_type: MarkerType) -> None:
         """Set the type of marker to record."""
