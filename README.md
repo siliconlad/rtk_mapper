@@ -1,5 +1,9 @@
 # rtk_mapper
 
+<p align="center">
+<img src="./docs/image.png" width="400"/>
+</p>
+
 [`rtk_mapper`](https://github.com/siliconlad/rtk_mapper) is a ROS 2 package which provides a GUI interface to help with
 viewing and recording landmark positions using a
 RTK-enabled GNSS receiver ([such as](https://www.ardusimple.com/product/simplertk2b-starter-kit-lr-ip65/)). The
