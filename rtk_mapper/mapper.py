@@ -40,18 +40,22 @@ class RTKMapper(Node):
         self.window = pygame.display.set_mode((700, 700), pygame.locals.DOUBLEBUF)
         self.screen: pygame.Surface = pygame.display.get_surface()
 
+        # Save path to where the map will be stored
+        if (load_map_path := self.declare_parameter("map", "").value) == "":
+            self.map: RTKMap = RTKMap()
+        else:
+            self.map: RTKMap = RTKFormat.load_csv(load_map_path)
+        date = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')
+        self.map_path: str = path.join(self.EUFS_MASTER, "map", f"rtk_map_{date}.csv")
+        self.utm_map_path: str = path.join(self.EUFS_MASTER, "map", f"rtk_map_{date}_utm.csv")
+
         # State
-        self.map: RTKMap = RTKMap()
         self.car_start_count: int = 0
         self.accumulate: bool = False
         self.m_type: MarkerType | None = None
         self.m_type_str: str = ""
         self.fix_buff: np.ndarray = np.array([]).reshape((0, 2))
         self.cov_buff: np.ndarray = np.array([]).reshape((0, 2, 2))
-        # Save path to where the map will be stored
-        date = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')
-        self.map_path: str = path.join(self.EUFS_MASTER, "map", f"rtk_map_{date}.csv")
-        self.utm_map_path: str = path.join(self.EUFS_MASTER, "map", f"rtk_map_{date}_utm.csv")
 
         # ROS Parameters
         self.thresh: float = self.declare_parameter("threshold", 0.0002).value
