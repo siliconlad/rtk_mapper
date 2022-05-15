@@ -123,7 +123,7 @@ class RTKMapper(Node):
     def stop_accumulation(self) -> None:
         """Stop accumulation of messages."""
         if self.accumulate:
-            self.get_logger().warn("Stop accumulation of messages")
+            self.get_logger().info("Stop accumulation of messages")
             self.accumulate = False
 
     def toggle_update_mode(self) -> None:
