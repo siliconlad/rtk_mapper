@@ -11,6 +11,16 @@ The package contains two ROS nodes:
 1. `mapper`: a GUI utility to help map tracks
 2. `viewer`: a GUI utility to quickly view tracks stored in a CSV file
 
+## Requirements
+
+This package requires [ROS 2 Galactic](https://docs.ros.org/en/galactic/Installation.html) and on the following
+third-party Python packages:
+
+1. [pygame](https://pypi.org/project/pygame/)
+2. [numpy](https://pypi.org/project/numpy/)
+3. [utm](https://pypi.org/project/utm/)
+4. [matplotlib](https://pypi.org/project/matplotlib/)
+
 ## Installation
 
 First, clone this repository into your ROS workspace:
@@ -61,16 +71,6 @@ the `x-direction` (assuming a straight between `CAR_START` and the start/finish 
    then delete the selected cone, or update its position. You cannot add new markers in this mode.
 
 When the program is quit, two CSV files are saved to `$EUFS_MASTER/map` (see CSV File Formats section).
-
-### Requirements
-
-This package requires [ROS 2 Galactic](https://docs.ros.org/en/galactic/Installation.html) and on the following
-third-party Python packages:
-
-1. [pygame](https://pypi.org/project/pygame/)
-2. [numpy](https://pypi.org/project/numpy/)
-3. [utm](https://pypi.org/project/utm/)
-4. [matplotlib](https://pypi.org/project/matplotlib/)
 
 ### Usage
 
