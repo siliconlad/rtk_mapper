@@ -1,5 +1,6 @@
 import os
 from glob import glob
+
 from setuptools import setup, find_packages
 
 package_name = 'rtk_mapper'
@@ -27,6 +28,7 @@ setup(
     entry_points={
         'console_scripts': [
             'mapper = rtk_mapper.mapper:main',
+            'viewer = rtk_mapper.viewer:main'
         ],
     },
 )
