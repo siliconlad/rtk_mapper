@@ -39,7 +39,7 @@ class MarkerType(Enum):
     BLUE = "#0000ff"
     YELLOW = "#ecef1f"
     ORANGE = "#ff8c00"
-    BIG_ORANGE = "#ff8c00"
+    BIG_ORANGE = "#ff8c01"
     UNKNOWN = "#636363"
     CAR_START = "#36a538"
 
