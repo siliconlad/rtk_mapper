@@ -109,9 +109,12 @@ class RTKMap:
         Wraps around to the beginning if the currently selected marker is at the end.
 
         :raises NotInUpdateMode: raised if not in update mode.
+        :raises NoMarkers: raised if map has no markers
         """
         if not self.update_mode:
             raise NotInUpdateMode("Must be in update mode to select next marker.")
+        elif len(self.markers) == 0:
+            raise NoMarkers("No markers to select!")
         self.selected = (self.selected + 1) % len(self.markers)
 
     def select_prev_marker(self) -> None:
@@ -120,9 +123,12 @@ class RTKMap:
         Wraps around to the end if currently selected marker is at index 0.
 
         :raises NotInUpdateMode: raised if not in update mode.
+        :raises NoMarkers: raised if map has no markers
         """
         if not self.update_mode:
             raise NotInUpdateMode("Must be in update mode to select prev marker.")
+        elif len(self.markers) == 0:
+            raise NoMarkers("No markers to select!")
         self.selected = (self.selected + len(self.markers) - 1) % len(self.markers)
 
     def update_marker(self, m: Marker) -> None:

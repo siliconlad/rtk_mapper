@@ -149,12 +149,16 @@ class RTKMapper(Node):
             self.map.select_next_marker()
         except NotInUpdateMode:
             self.get_logger().warn("Must be in update mode to select next marker.")
+        except NoMarkers:
+            self.get_logger().warn("Map is empty; next marker cannot be selected.")
 
     def select_prev_marker(self) -> None:
         try:
             self.map.select_prev_marker()
         except NotInUpdateMode:
             self.get_logger().warn("Must be in update mode to select prev marker.")
+        except NoMarkers:
+            self.get_logger().warn("Map is empty; prev marker cannot be selected.")
 
     def loop(self) -> None:
         """Main pygame loop which handles keyboard input."""
