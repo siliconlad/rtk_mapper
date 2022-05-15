@@ -67,6 +67,8 @@ class CSVFormat:
 
         raise ValueError(f"Invalid marker type: {t}")
 
+    def __str__(self):
+        raise NotImplementedError
 
 class EUFSFormat(CSVFormat):
     """
@@ -129,6 +131,8 @@ class EUFSFormat(CSVFormat):
                 ]
                 f.write(",".join(line) + "\n")
 
+    def __str__(self):
+        return "eufs"
 
 class RTKFormat(CSVFormat):
     """
@@ -188,3 +192,6 @@ class RTKFormat(CSVFormat):
                     str(marker.cov[1])
                 ]
                 f.write(",".join(line) + "\n")
+
+    def __str__(self):
+        return "rtk"
