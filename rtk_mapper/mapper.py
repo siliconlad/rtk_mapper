@@ -67,12 +67,12 @@ class RTKMapper(Node):
         self.timer_ = self.create_timer(0.01, self.loop)
 
         # Finish by printing instructions on how to use the program
+        self.get_logger().info("rtk_mapper is ready!")
         self.print_help()
 
     def print_help(self) -> None:
         """Print help"""
         self.get_logger().info("--------")
-        self.get_logger().info("rtk_mapper is ready!")
         self.get_logger().info("Press b for BLUE, y for YELLOW, o for ORANGE, s for BIG_ORANGE")
         self.get_logger().info("Press c to enter CAR START position")
         self.get_logger().info("Press u to enter UPDATE MODE")
@@ -80,6 +80,7 @@ class RTKMapper(Node):
         self.get_logger().info("Press TAB in UPDATE MODE to select cone")
         self.get_logger().info("Press press space to record messages")
         self.get_logger().info("Press press q to quit")
+        self.get_logger().info("--------")
 
     def shutdown(self) -> None:
         """Shuts down the program."""
