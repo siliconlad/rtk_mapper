@@ -34,14 +34,24 @@ class NoMarkers(IndexError):
     pass
 
 
-class MarkerType(Enum):
-    """Marker types with associated hex color"""
-    BLUE = "#0000ff"
-    YELLOW = "#ecef1f"
-    ORANGE = "#ff8c00"
-    BIG_ORANGE = "#ff8c01"
-    UNKNOWN = "#636363"
-    CAR_START = "#36a538"
+class MarkerType(str, Enum):
+    """Marker types with associated hex color."""
+    hex_code: str
+
+    # https://rednafi.github.io/reflections/add-additional-attributes-to-enum-members-in-python.html
+    def __new__(cls, title: str, hex_code: str = "") -> MarkerType:
+        obj = str.__new__(cls, title)
+        obj._value_ = title
+
+        obj.hex_code = hex_code
+        return obj
+
+    BLUE = ("blue", "#0000ff")
+    YELLOW = ("yellow", "#ecef1f")
+    ORANGE = ("orange", "#ff8c00")
+    BIG_ORANGE = ("big_orange", "#ff8c00")
+    UNKNOWN = ("unknown", "#636363")
+    CAR_START = ("car_start", "#36a538")
 
 
 class Marker:

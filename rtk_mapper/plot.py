@@ -18,5 +18,5 @@ class RTKPlotter:
         ax.set_ylabel("")
         ax.set_xlabel("")
         for marker in m.markers:
-            ax.scatter(marker.pos[0], marker.pos[1], 49, marker.type.value, edgecolors='k')
+            ax.scatter(marker.pos[0], marker.pos[1], 49, marker.type.hex_code, edgecolors='k')
         return ax
