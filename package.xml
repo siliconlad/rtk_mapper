@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>rtk_mapper</name>
-  <version>0.0.0</version>
+  <version>0.1.0</version>
   <description>A utility to map the cones of a Formula Student track using an RTK receiver.</description>
   <author email="siliconlad@protonmail.com">Angus Stewart</author>
   <maintainer email="siliconlad@protonmail.com">Angus Stewart</maintainer>
