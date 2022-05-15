@@ -197,6 +197,7 @@ class RTKMapper(Node):
                     self.select_prev_marker()
             elif event.type == pygame.KEYUP and event.key == pygame.K_SPACE:
                 self.stop_accumulation()
+        self.update()
 
     def fix_cb(self, msg: NavSatFix) -> None:
         """
