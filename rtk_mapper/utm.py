@@ -11,6 +11,7 @@ def utm_transform(map: RTKMap, copy: bool = False) -> RTKMap:
     m: RTKMap = deepcopy(map) if copy else map
     for i, marker in enumerate(m.markers):
         m.markers[i] = utm_transform_marker(marker)
+    return m
 
 
 def utm_transform_marker(marker: Marker, copy: bool = False) -> Marker:
