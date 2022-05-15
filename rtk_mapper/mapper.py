@@ -163,21 +163,21 @@ class RTKMapper(Node):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     self.shutdown()
-                elif event.key == pygame.K_SPACE:
+                elif event.unicode == ' ':  # space key
                     self.start_accumulation()
-                elif event.key == pygame.K_u:
+                elif event.unicode == 'u':
                     self.toggle_update_mode()
-                elif event.key == pygame.K_b:
+                elif event.unicode == 'b':
                     self.set_marker(MarkerType.BLUE)
-                elif event.key == pygame.K_y:
+                elif event.unicode == 'y':
                     self.set_marker(MarkerType.YELLOW)
-                elif event.key == pygame.K_o and event.mod == 0:
+                elif event.unicode == 'o':
                     self.set_marker(MarkerType.ORANGE)
-                elif event.key == pygame.K_o and event.mod == 1:
+                elif event.unicode == 'O':
                     self.set_marker(MarkerType.BIG_ORANGE)
-                elif event.key == pygame.K_c:
+                elif event.unicode == 'c':
                     self.set_marker(MarkerType.CAR_START)
-                elif event.key == pygame.K_d:
+                elif event.unicode == 'd':
                     self.delete()
                 elif event.key == pygame.K_TAB and event.mod == 0:
                     self.select_next_marker()
