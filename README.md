@@ -99,8 +99,8 @@ The complete list of keys and their meaning in the two different modes are as fo
 |   `c`   |    -    | select CAR_START marker type  | select CAR_START marker type  |
 |   `d`   |    -    | delete last added marker      | delete selected marker        |
 |   `u`   |    -    | enter update mode             | exit update mode              |
-|  `TAB`  |    -    | -                             | select next marker            |
-|  `TAB`  | `SHIFT` | -                             | select prev marker            |
+|  `TAB`  |    -    | -                             | select prev marker            |
+|  `TAB`  | `SHIFT` | -                             | select next marker            |
 |   `q`   |    -    | save and quit                 | save and quit                 |
 | `SPACE` |    -    | capture `NavSatFix` messages  | capture `NavSatFix` messages  |
 
