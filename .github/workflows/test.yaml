@@ -35,9 +35,8 @@ jobs:
 
       - name: Install python dependencies
         run: |
-          apt install -y python3-pip
-          python3 -m pip install --upgrade pip
-          pip install pylint flake8 pytest bandit
+          pip3 install --upgrade pip
+          pip3 install pylint flake8 pytest bandit
 
       - name: Install ROS dependencies
         run: |
