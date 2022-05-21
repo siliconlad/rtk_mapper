@@ -1,5 +1,7 @@
 # rtk_mapper
 
+[![Unit Tests](https://github.com/siliconlad/rtk_mapper/actions/workflows/test.yaml/badge.svg)](https://github.com/siliconlad/rtk_mapper/actions/workflows/test.yaml)
+
 <p align="center">
 <img src="./docs/image.png" width="400"/>
 </p>
