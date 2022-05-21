@@ -16,16 +16,19 @@ jobs:
           # Foxy Fitzroy (June 2020 - May 2023)
           - docker_image: ros:foxy
             ros_distribution: foxy
+            python-version: "3.8"
             ros_version: 2
 
           # Galactic Geochelone (May 2021 - November 2022)
           - docker_image: ros:galactic
             ros_distribution: galactic
+            python-version: "3.8"
             ros_version: 2
 
           # Rolling Ridley (No End-Of-Life)
           - docker_image: ros:rolling
             ros_distribution: rolling
+            python-version: "3.10"
             ros_version: 2
     container:
       image: ${{ matrix.docker_image }}
@@ -33,10 +36,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Install python dependencies
         run: |
-          pip3 install --upgrade pip
-          pip3 install pylint flake8 pytest bandit
+          python3 -m pip install --upgrade pip
+          python3 -m pip install pylint flake8 pytest bandit
 
       - name: Install ROS dependencies
         run: |
