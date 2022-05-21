@@ -77,13 +77,13 @@ class RTKViewer(Node):
         """
         # Create figure
         fig: matplotlib.figure.Figure = pylab.figure(figsize=[7, 7], dpi=100)
-        ax = fig.gca()
+        axs = fig.gca()
 
         # Plot map in UTM because it looks better
         if self.raw_gps:
-            RTKPlotter.plot(utm_transform(self.map, copy=True), ax)
+            RTKPlotter.plot(utm_transform(self.map, copy=True), axs)
         else:
-            RTKPlotter.plot(self.map, ax)
+            RTKPlotter.plot(self.map, axs)
         fig.tight_layout()
 
         # Matplotlib magic to get it to work with pygame

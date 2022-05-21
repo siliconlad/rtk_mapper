@@ -9,27 +9,22 @@ import numpy as np
 
 class NotEnoughOrangeMarkers(RuntimeError):
     """Raised when map has not enough orange cones."""
-    pass
 
 
 class NoCarStartMarker(RuntimeError):
     """Raised when map has no car start marker."""
-    pass
 
 
 class InUpdateMode(RuntimeError):
     """Raised when RTKMap is in update mode"""
-    pass
 
 
 class NotInUpdateMode(RuntimeError):
     """Raised when RTKMap is not in update mode"""
-    pass
 
 
 class NoMarkers(IndexError):
     """Raised when no markers are left and deletion is attempted."""
-    pass
 
 
 class MarkerType(str, Enum):
@@ -65,17 +60,17 @@ class RTKMap:
         self.markers: List[Marker] = []  # Stores the list of markers representing the map
         self.selected: int = 0  # Index of selected marker
 
-    def add_marker(self, m: Marker) -> None:
+    def add_marker(self, marker: Marker) -> None:
         """
         Adds marker to map.
 
-        :param m: marker to add
+        :param marker: marker to add
         :raises InUpdateMode: raised when in update mode
         """
         if self.update_mode:
             raise InUpdateMode("Cannot add marker while in update mode.")
 
-        self.markers.append(m)
+        self.markers.append(marker)
         self.selected = len(self.markers) - 1
 
     def remove_marker(self) -> None:
@@ -114,7 +109,7 @@ class RTKMap:
         """
         if not self.update_mode:
             raise NotInUpdateMode("Must be in update mode to select next marker.")
-        elif len(self.markers) == 0:
+        if len(self.markers) == 0:
             raise NoMarkers("No markers to select!")
         self.selected = (self.selected + 1) % len(self.markers)
 
@@ -140,16 +135,16 @@ class RTKMap:
             raise NotInUpdateMode("Must be in update mode to select prev marker.")
         self._select_prev_marker()
 
-    def update_marker(self, m: Marker) -> None:
+    def update_marker(self, marker: Marker) -> None:
         """
         Updates the currently selected marker with the new marker.
 
-        :param m: new marker to replace selected marker.
+        :param marker: new marker to replace selected marker.
         :raises NotInUpdateMode: raised if not in update mode.
         """
         if not self.update_mode:
             raise NotInUpdateMode("Must be in update mode to select prev marker.")
-        self.markers[self.selected] = m
+        self.markers[self.selected] = marker
 
     def normalize(self) -> None:
         """
@@ -200,14 +195,3 @@ class RTKMap:
         # Transform every marker
         for marker in self.markers:
             marker.pos = (marker.pos - car_start) @ R.T
-
-
-def main():
-    """
-    Takes a path to CSV and plots it using RTKMap.
-    """
-    pass
-
-
-if __name__ == '__main__':
-    main()
