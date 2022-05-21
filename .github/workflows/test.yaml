@@ -25,16 +25,16 @@ jobs:
 
       - name: Lint with flake8
         run: |
-          flake8 . --max-line-length=100
+          python -m flake8 . --max-line-length=100
 
       - name: Lint with pylint
         run: |
-          pylint $(git ls-files '*.py') --max-line-length=100
+          python -m pylint $(git ls-files '*.py') --max-line-length=100
 
       - name: Check security with bandit
         run: |
-          bandit -r .
+          python -m bandit -r .
 
       - name: Test with pytest
         run: |
-          pytest
+          python -m pytest
