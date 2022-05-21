@@ -50,7 +50,7 @@ jobs:
         run: |
           echo "yaml https://gitlab.com/eufs/eufs_rosdep/-/raw/master/python.yaml" >> /etc/ros/rosdep/sources.list.d/19-eufs.list
           rosdep update
-          rosdep install --ignore-src -r -y --rosdistro=${{ matrix.ros_distribution }}
+          rosdep install --from-paths . --ignore-src -r -y --rosdistro=${{ matrix.ros_distribution }}
           
       - name: Lint with flake8
         run: |
