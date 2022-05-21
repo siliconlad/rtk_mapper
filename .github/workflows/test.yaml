@@ -58,7 +58,8 @@ jobs:
 
       - name: Lint with pylint
         run: |
-          python3 -m pylint rtk_mapper --max-line-length=100
+          git config --global --add safe.directory /__w/rtk_mapper/rtk_mapper
+          python3 -m pylint $(git ls-files '*.py') --max-line-length=100
 
       - name: Check security with bandit
         run: |
