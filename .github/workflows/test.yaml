@@ -58,7 +58,7 @@ jobs:
 
       - name: Lint with pylint
         run: |
-          python3 -m pylint . --max-line-length=100
+          python3 -m pylint rtk_mapper --max-line-length=100
 
       - name: Check security with bandit
         run: |
