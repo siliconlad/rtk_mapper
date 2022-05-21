@@ -35,8 +35,12 @@ jobs:
 
       - name: Install python dependencies
         run: |
+          apt install -y python3-pip
           python3 -m pip install --upgrade pip
           pip install pylint flake8 pytest bandit
+
+      - name: Install ROS dependencies
+        run: |
           echo "yaml https://gitlab.com/eufs/eufs_rosdep/-/raw/master/python.yaml" >> /etc/ros/rosdep/sources.list.d/19-eufs.list
           rosdep update
           rosdep install --ignore-src --from-paths src -r -y --rosdistro=${{ matrix.ros_distribution }}
