@@ -85,7 +85,7 @@ class RTKMapper(Node):
         self.get_logger().info("Press b for BLUE, y for YELLOW, o for ORANGE, s for BIG_ORANGE")
         self.get_logger().info("Press c to enter CAR START position")
         self.get_logger().info("Press u to enter UPDATE MODE")
-        self.get_logger().info("Press d to delete last measurement, or selected marker in UPDATE MODE")
+        self.get_logger().info("Press d to delete last marker, or selected marker in UPDATE MODE")
         self.get_logger().info("Press TAB in UPDATE MODE to select marker")
         self.get_logger().info("Press press space to record messages")
         self.get_logger().info("Press press q to quit")
@@ -264,7 +264,7 @@ class RTKMapper(Node):
         raw_data = renderer.tostring_rgb()
         size = canvas.get_width_height()
         surf = pygame.image.fromstring(raw_data, size, "RGB")
-        self.screen.blit(surf, (0,0))
+        self.screen.blit(surf, (0, 0))
         pygame.display.flip()
 
         # Destroy figure

@@ -2,7 +2,6 @@ from typing import List
 
 import numpy as np
 import pandas as pd
-
 from rtk_mapper.map import RTKMap, Marker, MarkerType
 
 
@@ -70,6 +69,7 @@ class CSVFormat:
     def __str__(self):
         raise NotImplementedError
 
+
 class EUFSFormat(CSVFormat):
     """
     Conversion tool between CSV in EUFS Format (eufs_sim) and RTKMap object.
@@ -105,7 +105,8 @@ class EUFSFormat(CSVFormat):
         for i, r in df.iterrows():
             # Ignore direction because it makes no difference for the map
             pos: np.ndarray = np.array([r['x'], r['y']])
-            cov: np.ndarray = np.array([r['x_variance'], r['xy_covariance'], r['xy_covariance'], r['y_variance']])
+            cov: np.ndarray = np.array(
+                [r['x_variance'], r['xy_covariance'], r['xy_covariance'], r['y_variance']])
             m_type: MarkerType = EUFSFormat.get_marker_type(r['tag'])
             m.add_marker(Marker(pos, cov, m_type))
         return m
@@ -134,6 +135,7 @@ class EUFSFormat(CSVFormat):
     def __str__(self):
         return "eufs"
 
+
 class RTKFormat(CSVFormat):
     """
     Conversion tool between CSV in rtk_mapper format and RTKMap object.
@@ -146,7 +148,8 @@ class RTKFormat(CSVFormat):
         longitude_var: longitude variance
         covariance: latitude-longitude covariance
     """
-    fmt: List[str] = ['type', 'latitude', 'longitude', 'latitude_var', 'longitude_var', 'covariance']
+    fmt: List[str] = ['type', 'latitude', 'longitude', 'latitude_var', 'longitude_var',
+                      'covariance']
 
     @staticmethod
     def load_csv(path: str) -> RTKMap:
@@ -167,7 +170,8 @@ class RTKFormat(CSVFormat):
         m: RTKMap = RTKMap()
         for i, r in df.iterrows():
             pos: np.ndarray = np.array([r['longitude'], r['latitude']])
-            cov: np.ndarray = np.array([r['longitude_var'], r['covariance'], r['covariance'], r['latitude_var']])
+            cov: np.ndarray = np.array(
+                [r['longitude_var'], r['covariance'], r['covariance'], r['latitude_var']])
             m_type: MarkerType = RTKFormat.get_marker_type(r['type'])
             m.add_marker(Marker(pos, cov, m_type))
         return m
