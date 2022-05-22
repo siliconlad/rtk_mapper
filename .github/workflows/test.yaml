@@ -50,21 +50,21 @@ jobs:
           
       - name: Lint with flake8
         run: |
-          . /opt/ros/galactic/setup.sh
+          . /opt/ros/$ROS_DISTRO/setup.sh
           python3 -m flake8 . --max-line-length=100
 
       - name: Lint with pylint
         run: |
-          . /opt/ros/galactic/setup.sh
+          . /opt/ros/$ROS_DISTRO/setup.sh
           git config --global --add safe.directory /__w/rtk_mapper/rtk_mapper
           python3 -m pylint $(git ls-files '*.py') --max-line-length=100 --fail-under=9
 
       - name: Check security with bandit
         run: |
-          . /opt/ros/galactic/setup.sh
+          . /opt/ros/$ROS_DISTRO/setup.sh
           python3 -m bandit -r .
 
       - name: Test with pytest
         run: |
-          . /opt/ros/galactic/setup.sh
+          . /opt/ros/$ROS_DISTRO/setup.sh
           python3 -m pytest
