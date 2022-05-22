@@ -54,7 +54,7 @@ jobs:
 
       - name: Lint with pylint
         run: |
-          echo $PYTHONPATH
+          . /opt/ros/galactic/setup.sh
           git config --global --add safe.directory /__w/rtk_mapper/rtk_mapper
           python3 -m pylint $(git ls-files '*.py') --max-line-length=100 --fail-under=9
 
