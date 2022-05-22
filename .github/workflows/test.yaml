@@ -50,12 +50,12 @@ jobs:
           
       - name: Lint with flake8
         run: |
-          source /opt/ros/galactic/setup.bash
+          . /opt/ros/galactic/setup.bash
           python3 -m flake8 . --max-line-length=100
 
       - name: Lint with pylint
         run: |
-          source /opt/ros/galactic/setup.bash
+          . /opt/ros/galactic/setup.bash
           git config --global --add safe.directory /__w/rtk_mapper/rtk_mapper
           python3 -m pylint $(git ls-files '*.py') --max-line-length=100 --fail-under=9
 
