@@ -39,7 +39,8 @@ jobs:
       - name: Install python dependencies
         run: |
           pip3 install --upgrade pip
-          pip3 install pylint flake8 pytest bandit mypy
+          pip3 install git+https://github.com/PyCQA/pyflakes.git --upgrade
+          pip3 install pylint flake8 pytest bandit mypy  --upgrade
 
       - name: Install ROS dependencies
         run: |
