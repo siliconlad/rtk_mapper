@@ -1,4 +1,3 @@
-import pytest
 from rtk_mapper.csv import CSVFormat
 from rtk_mapper.map import MarkerType
 
