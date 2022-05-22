@@ -14,15 +14,15 @@ jobs:
           - rolling
         include:
           # Foxy Fitzroy (June 2020 - May 2023)
-          - docker_image: ubuntu:focal
+          - docker_image: ros:foxy
             ros_distribution: foxy
 
           # Galactic Geochelone (May 2021 - November 2022)
-          - docker_image: ubuntu:focal
+          - docker_image: ros:galactic
             ros_distribution: galactic
 
           # Rolling Ridley (No End-Of-Life)
-          - docker_image: ubuntu:jammy
+          - docker_image: ros:rolling
             ros_distribution: rolling
     container:
       image: ${{ matrix.docker_image }}
@@ -32,13 +32,11 @@ jobs:
 
       - name: Setup ROS environment
         uses: ros-tooling/setup-ros@v0.3
-        with:
-          required-ros-distributions: ${{ matrix.ros_distribution }}
 
       - name: Install python dependencies
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install pylint flake8 pytest bandit mypy
+          pip3 install --upgrade pip
+          pip3 install pylint flake8 pytest bandit mypy
 
       - name: Install ROS dependencies
         run: |
@@ -48,17 +46,17 @@ jobs:
           
       - name: Lint with flake8
         run: |
-          python3 -m flake8 . --max-line-length=100
+          flake8 . --max-line-length=100
 
       - name: Lint with pylint
         run: |
           git config --global --add safe.directory /__w/rtk_mapper/rtk_mapper
-          python3 -m pylint $(git ls-files '*.py') --max-line-length=100 --fail-under=9
+          pylint $(git ls-files '*.py') --max-line-length=100 --fail-under=9
 
       - name: Check security with bandit
         run: |
-          python3 -m bandit -r .
+          bandit -r .
 
       - name: Test with pytest
         run: |
-          python3 -m pytest
+          pytest
