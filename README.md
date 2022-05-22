@@ -24,8 +24,9 @@ third-party Python packages:
 
 1. [pygame](https://pypi.org/project/pygame/)
 2. [numpy](https://pypi.org/project/numpy/)
-3. [utm](https://pypi.org/project/utm/)
+3. [pandas](https://pypi.org/project/pandas/)
 4. [matplotlib](https://pypi.org/project/matplotlib/)
+5. [utm](https://pypi.org/project/utm/)
 
 ## Installation
 
