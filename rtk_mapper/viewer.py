@@ -64,7 +64,7 @@ class RTKViewer(Node):
 
     def loop(self) -> None:
         """Main pygame loop which handles keyboard input."""
-        event: pygame.event.EventType
+        event: pygame.event.Event
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
