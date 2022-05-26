@@ -45,6 +45,7 @@ class MarkerType(str, Enum):
     BIG_ORANGE = ("big_orange", "#ff8c00")
     UNKNOWN = ("unknown", "#636363")
     CAR_START = ("car_start", "#36a538")
+    NOT_SELECTED = ("not_selected", "#000000")
 
 
 class Marker:
@@ -159,7 +160,7 @@ class RTKMap:
         if len(self.markers) == 0:
             raise NoMarkers("No markers! Cannot normalize map.")
 
-        car_start: Marker | None = None
+        car_start: np.ndarray | None = None
         big_orange: np.ndarray = np.array([]).reshape((0, 2))
         for marker in self.markers:
             if marker.type == MarkerType.CAR_START:

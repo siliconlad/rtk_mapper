@@ -54,7 +54,7 @@ class RTKMapper(Node):
         # State
         self.car_start_count: int = 0
         self.accumulate: bool = False
-        self.m_type: MarkerType | None = None
+        self.m_type: MarkerType = MarkerType.NOT_SELECTED
         self.m_type_str: str = ""
         self.fix_buff: np.ndarray = np.array([]).reshape((0, 2))
         self.cov_buff: np.ndarray = np.array([]).reshape((0, 2, 2))
@@ -123,7 +123,7 @@ class RTKMapper(Node):
         have_car_start: bool = self.m_type == MarkerType.CAR_START and self.car_start_count > 0
         if have_car_start and not self.map.update_mode:
             self.get_logger().warn("Already recorded car_start!")
-        elif self.m_type is None:
+        elif self.m_type is MarkerType.NOT_SELECTED:
             self.get_logger().warn("Please select a cone color before accumulating!")
         else:
             self.get_logger().info("Start accumulation of messages!")
@@ -214,7 +214,7 @@ class RTKMapper(Node):
         if self.accumulate:
             # Add message to buffer
             self.fix_buff = np.vstack((self.fix_buff, [msg.longitude, msg.latitude]))
-            cov: list = np.array([
+            cov: np.ndarray = np.array([
                 [msg.position_covariance[0], msg.position_covariance[3]],
                 [msg.position_covariance[1], msg.position_covariance[4]]
             ])
