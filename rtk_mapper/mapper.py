@@ -154,7 +154,9 @@ class RTKMapper(Node):
     def delete(self) -> None:
         """Delete marker"""
         try:
-            self.map.remove_marker()
+            marker: Marker = self.map.remove_marker()
+            if marker.type == MarkerType.CAR_START:
+                self.car_start_count -= 1
         except NoMarkers:
             self.get_logger().warn("No markers to delete!")
 

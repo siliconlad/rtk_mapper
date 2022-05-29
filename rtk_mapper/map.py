@@ -74,7 +74,7 @@ class RTKMap:
         self.markers.append(marker)
         self.selected = len(self.markers) - 1
 
-    def remove_marker(self) -> None:
+    def remove_marker(self) -> Marker:
         """
         Removes marker. Which one depends on the mode. If in update mode, removes the selected
         marker. Otherwise, removes the last added marker. In both cases, the new selected
@@ -86,11 +86,11 @@ class RTKMap:
             raise NoMarkers("No markers to remove!")
 
         idx: int = self.selected if self.update_mode else -1
-        self.markers.pop(idx)
         try:
             self._select_prev_marker()
         except NoMarkers:
             self.selected = 0
+        return self.markers.pop(idx)
 
     def enter_update_mode(self) -> None:
         """Enters update mode. Does nothing if already in update mode."""
