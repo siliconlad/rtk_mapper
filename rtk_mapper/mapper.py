@@ -247,7 +247,7 @@ class RTKMapper(Node):
                 self.get_logger().info(f"Saved {self.m_type_str} cone at {avg_fix}")
             else:
                 self.map.update_marker(m)
-            
+ 
             self.update()
 
     def update(self) -> None:
