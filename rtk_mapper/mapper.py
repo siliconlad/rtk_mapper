@@ -157,12 +157,14 @@ class RTKMapper(Node):
             marker: Marker = self.map.remove_marker()
             if marker.type == MarkerType.CAR_START:
                 self.car_start_count -= 1
+            self.update()
         except NoMarkers:
             self.get_logger().warn("No markers to delete!")
 
     def select_next_marker(self) -> None:
         try:
             self.map.select_next_marker()
+            self.update()
         except NotInUpdateMode:
             self.get_logger().warn("Must be in update mode to select next marker.")
         except NoMarkers:
@@ -171,6 +173,7 @@ class RTKMapper(Node):
     def select_prev_marker(self) -> None:
         try:
             self.map.select_prev_marker()
+            self.update()
         except NotInUpdateMode:
             self.get_logger().warn("Must be in update mode to select prev marker.")
         except NoMarkers:
@@ -205,7 +208,6 @@ class RTKMapper(Node):
                     self.select_next_marker()
             elif event.type == pygame.KEYUP and event.key == pygame.K_SPACE:
                 self.stop_accumulation()
-        self.update()
 
     def fix_cb(self, msg: NavSatFix) -> None:
         """
@@ -245,6 +247,8 @@ class RTKMapper(Node):
                 self.get_logger().info(f"Saved {self.m_type_str} cone at {avg_fix}")
             else:
                 self.map.update_marker(m)
+            
+            self.update()
 
     def update(self) -> None:
         """
