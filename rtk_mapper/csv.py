@@ -200,8 +200,8 @@ class RTKFormat(CSVFormat):
             for marker in rtk_map.markers:
                 line: List[str] = [
                     RTKFormat.get_marker_str(marker.type),
-                    str(marker.pos[0]),
                     str(marker.pos[1]),
+                    str(marker.pos[0]),
                     str(marker.cov[0]),
                     str(marker.cov[3]),
                     str(marker.cov[1])
