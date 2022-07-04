@@ -137,6 +137,7 @@ class EUFSFormat(CSVFormat):
                     EUFSFormat.get_marker_str(marker.type),
                     str(marker.pos[0]),
                     str(marker.pos[1]),
+                    '0',  # TODO(angus): sometimes the direction may not be 0
                     str(marker.cov[0]),
                     str(marker.cov[3]),
                     str(marker.cov[1])
